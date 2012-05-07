@@ -125,7 +125,7 @@ Kohana::modules(array(
 	// 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
-	   'mp3tools'  => MODPATH.'mp3tools',    // getid3
+	   'mp3tools'   => MODPATH.'mp3tools',    // getid3
 	));
 
 /**
@@ -144,6 +144,6 @@ Route::set('skip', 'skip')
 	));
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
-		'controller' => 'prototype',
+		'controller' => 'home',
 		'action'     => 'index',
 	));

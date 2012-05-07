@@ -3,7 +3,6 @@
 class Model_G2interface extends Model {
 	
 	/**
-	 * 
 	 * Get a random song, doesn't matter what (banned or whatever)
 	 */
 	public static function get_random_song() {
@@ -36,7 +35,6 @@ class Model_G2interface extends Model {
 	}
 	
 	/**
-	 * 
 	 * Get a specific song
 	 */
 	public static function get_song($id) {
@@ -64,7 +62,6 @@ class Model_G2interface extends Model {
 	}
 	
 	/**
-	 * 
 	 * Work out the absolute path for the given song.
 	 * @param array $song
 	 */
