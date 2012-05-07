@@ -1,0 +1,1 @@
+<p id="noticearea"><?php echo HTML::chars($notice); ?></p> 
