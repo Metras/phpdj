@@ -114,7 +114,7 @@ class Model_Playlist extends Model {
 	}
 	
 	/**
-	 * Get the currently playing song with user vote
+	 * Get the currently playing song with its current position, progress + the users vote score
 	 */
 	public static function getCurrentSong($user) {
 		$sql = "SELECT
@@ -145,7 +145,8 @@ class Model_Playlist extends Model {
 					LEFT JOIN auth_user AS adder ON (playlist_playlistentry.adder_id = adder.id)
 					LEFT JOIN auth_user AS uploader ON (playlist_song.uploader_id = uploader.id)";
 		$entry = Arr::flatten(DB::query(Database::SELECT, $sql)->param(':userid',$user['user_id'])->execute()->as_array());
-		$entry['song_position'] = 0;
+		$entry['progress'] = Model_G2interface::readICESCue();
+		$entry['position'] = $entry['progress'] * $entry['length'];
 		return $entry;
 	}
 }

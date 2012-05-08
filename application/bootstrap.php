@@ -142,6 +142,20 @@ Route::set('skip', 'skip')
 		'controller' => 'prototype',
 		'action'     => 'skip',
 	));
+
+Route::set('g2ajax', 'ajax')
+->defaults(array(
+		'controller' => 'g2api',
+		'action'     => 'ajax',
+));
+
+Route::set('g2api', 'api(/<action>)')
+->defaults(array(
+		'controller' => 'g2api',
+		'action'     => 'api',
+));
+
+
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
 		'controller' => 'home',

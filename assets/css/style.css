@@ -51,7 +51,6 @@ body {
   width:181px;
   height:129px;
   z-index:10;
-  background-image:url('/assets/images/konata.png');
   display:none; /* NO ONE LIKES KONATA :( */
 }
 #leftmenulogo {
@@ -393,7 +392,6 @@ div#votebuttonslow a {
   padding:0px;
   margin:0px;
   background-color:#D0B190;
-  background-image:url('/assets/images/pos.gif');
   display:none; /* IT DOESN'T WORK I CAN'T MAKE IT WORK AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA */
 }
 #metadata {

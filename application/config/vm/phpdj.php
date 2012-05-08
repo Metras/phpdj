@@ -19,7 +19,11 @@ return array (
 		'2' => array (
 			'adminpassword' => 'admin2'
 		)
-	)
+	),
+		
+	'g2' => array (
+		'icescuepath' => '/home/pydj/playlist/logic/ices.cue'
+			)
 )
 
 

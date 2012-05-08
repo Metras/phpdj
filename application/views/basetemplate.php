@@ -67,10 +67,10 @@ function addVoteHandlers () {
 /*** progress bar stuff ***/
  
 //both of these are in seconds
-var songLength = {{song_length}};
-var songPosition = {{song_position}};
+var songLength = <?php echo $now_playing['length']; ?>;
+var songPosition = <?php echo $now_playing['position']; ?>;
 //percentage
-var songProgress = {{song_progress}}; 
+var songProgress = <?php echo $now_playing['progress']; ?>; 
  
 function setSongLength(length) {
   songLength = length;
@@ -192,7 +192,7 @@ function commentSubmit() {
   }
   
   args['comment'] = comment;
-  $.getJSON("/api", args, eventDispatcher);
+  $.getJSON("/ajax", args, eventDispatcher);
   
   commentbox.val("");
   return false; //avoid default behaviour
@@ -294,13 +294,13 @@ function eventDispatcher(data) {
  
 //Main AJAX loop: handles all periodic AJAX calls
 function ajaxLoop() {
-  $.getJSON("/api", ajax_args, eventDispatcher);
+  $.getJSON("/ajax", ajax_args, eventDispatcher);
   setTimeout('ajaxLoop()', DELAY);
 }
  
 //for stored ajax args
 var ajax_args = {};
-var now_playing = {{now_playing.id|default:0}}
+var now_playing = <?php echo $now_playing['song_id']; ?>;
 $(document).ready(function(){
 
   //song position stuff
@@ -316,7 +316,7 @@ $(document).ready(function(){
   
   //ajax events stuff
   ajax_args['position'] = songPosition;
-  ajax_args['last_comment'] = {{last_comment|default:0}};
+  ajax_args['last_comment'] = <?php if ( ! empty($comments)) { $x = end($comments); echo $x['id']; } else { echo '0'; } ?>;
   $('body').bind('songPosition', songPositionHandler);
   $('body').bind('songLength', songLengthHandler);
   $('body').bind('linkedMetadata', linkedMetadataHandler);
@@ -394,9 +394,9 @@ $(document).ready(function(){
       
         <div id="progbarbox"> 
           <div id="progtube"> 
-            <div style="width:{{song_progress}}%;" id="progbar"></div> 
+            <div style="width:<?php echo $now_playing['progress']; ?>%;" id="progbar"></div> 
           </div> 
-          <span id="songPosition"><?php echo $now_playing['song_position']?></span>/<span id="songLength"><?php echo $now_playing['length']; ?></span>
+          <span id="songPosition"><?php echo $now_playing['position']?></span>/<span id="songLength"><?php echo $now_playing['length']; ?></span>
         </div> 
         <span><div id="metadata"><a href="/search/artist/<?php echo $now_playing['artist_id']; ?>"><?php echo $now_playing['artist']; ?></a> (<a href="/search/album/<?php echo $now_playing['album_id']; ?>"><?php echo $now_playing['album']; ?></a>) - <a href="/search/song/<?php echo $now_playing['song_id']; ?>"><?php echo $now_playing['title']; ?></a></div>
         <div id="votebuttonslow"> 

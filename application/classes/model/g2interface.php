@@ -72,4 +72,19 @@ class Model_G2interface extends Model {
 		$song['abspath'] = $song['path'].'/'.$subdir.$song['sha_hash'].'.'.$song['format'];
 		return $song;
 	}
+	
+	/**
+	 * Until we switch over to sc_trans for handling streaming duty, we will be leaching off g2 and ices.
+	 * G2 gets the current position in the song by reading a file called ices.cue that ices generates and updates as its streaming which contains
+	 * the position of the song its playing at (amongst other things)
+	 * This function will read that file and parse it as G2 does.
+	 * Only returns the current progress through the song from 0 to 1
+	 * @return float val from 0 to 1
+	 */
+	public static function readICESCue() {
+		$config = Kohana::$config->load('phpdj');
+		$cue = file_get_contents($config['g2']['icescuepath']);
+		$cue = explode("\n",$cue);
+		return (float) $cue[4] / 100;
+	}
 }

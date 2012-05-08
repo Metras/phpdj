@@ -103,7 +103,8 @@ function pllengthHandler(e, html) {
 $(document).ready(function(){
   //ajax calls & event handler bindings
   //TODO: do this automatically with just the events and args or something
-  ajax_args['last_removal'] = <?php echo $lastremoval; ?>
+  ajax_args['last_removal'] = <?php echo $lastremoval; ?>;
+  
   $('body').bind('removal', removalHandler);
   
   ajax_args['last_add'] = getLastEntry();
@@ -157,7 +158,7 @@ $(document).ready(function(){
         <td><a title="uploaded by: <?php echo $entry['uploader']; ?>" href="<?php echo '/user/'.$entry['adder_id']; ?>"><?php echo $entry['adder']; ?></a></td> 
         <td class="votes details"> 
 		<?php foreach (array(1,2,3,4,5) AS $vote ) {?>
-          <a href="<?php echo '/api/vote/'.$entry['song_id'].'/'.$vote ?>" class="vote<?php echo $vote.' '; echo ($entry['user_vote'] == $vote) ? ' voted ' : '';  ?>" data-songid="<?php echo $entry['song_id']; ?>" data-vote="<?php echo $vote; ?>"><?php echo $vote; ?></a> 
+          <a href="#" class="vote<?php echo $vote.' '; echo ($entry['user_vote'] == $vote) ? ' voted ' : '';  ?>" data-songid="<?php echo $entry['song_id']; ?>" data-vote="<?php echo $vote; ?>"><?php echo $vote; ?></a> 
         <?php } ?>
         </td> 
         <td class="score"><?php if ($entry['avg_score'] > 0) {
@@ -168,11 +169,11 @@ $(document).ready(function(){
         </td> 
         <td class="actions"> 
           <?php if ($entry['favourite'] == 1) { ?>
-            <a href="/"> 
+            <a href="/unfavourite/<?php echo $entry['song_id']; ?>"> 
               <img src="/assets/images/heart_delete.png" title="Remove this dong from your favourites" alt="unfavourite" /> 
             </a> 
           <?php } else { ?>
-            <a href="/"> 
+            <a href="/favourite/<?php echo $entry['song_id']; ?>"> 
               <img src="/assets/images/heart_add.png" title="Add this dong to your favourites" alt="favourite" /> 
             </a> 
           <?php } ?>
